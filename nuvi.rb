@@ -23,9 +23,9 @@ class Nuvi
     #unzip file
     xml_folder = Unzipper.new.unzip(xml_directory, downloaded_zip_file)
     #get xml files list
-    #check if xml file is duplicate
-    # use post-id or hash the file contents
-    #push content of xml file to redis
+    xml_files = Dir[File.join(xml_folder, '*.xml')]
+    # xml processor will check for duplicated and push to redis
+    xml_files.each { |file| XMLProcessor.new.process(file) }
   end
 end
 

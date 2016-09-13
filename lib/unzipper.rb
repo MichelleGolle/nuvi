@@ -12,7 +12,6 @@ class Unzipper
         file.extract(File.join(destination, file.name))
       end
     end
-
     destination
   end
 end

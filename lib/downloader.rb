@@ -8,7 +8,7 @@ class Downloader
     if !File.exist?(destination)
       http = Net::HTTP.new(uri.host, uri.port)
       http.request(Net::HTTP::Get.new(uri)) do |response|
-        save_response(response, destination)
+        save(response, destination)
       end
     end
     destination
@@ -16,7 +16,7 @@ class Downloader
 
 private
 
-  def save_response(response, destination)
+  def save(response, destination)
     #read content of zipfile and write to file to be saved in tmp folder
     open(destination, 'w') do |file|
       response.read_body do |str|

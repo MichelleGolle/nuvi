@@ -1,6 +1,6 @@
 require 'nokogiri'
-require 'open-uri'
 require 'pry'
+require 'open-uri'
 
 class Parser
   def parse(url)
