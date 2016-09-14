@@ -7,9 +7,8 @@ class Nuvi
   def initialize(url)
     #parse html from the url into list of zips
     url_list = Parser.new.parse(url)
-    puts "Returned #{url_list.count} zip files."
     #download each zip url, unzip it, get xml files, parse xml files, upload to redis
-    url_list[0..1].each do |zip_url|
+    url_list.each do |zip_url|
       download_parse_and_upload_to_redis(zip_url)
     end
   end
@@ -24,7 +23,7 @@ class Nuvi
     xml_folder = Unzipper.new.unzip(xml_directory, downloaded_zip_file)
     #get xml files list
     xml_files = Dir[File.join(xml_folder, '*.xml')]
-    # xml processor will check for duplicated and push to redis
+    # xml processor will check for duplicates and push to redis
     xml_files.each { |file| XMLProcessor.new.process(file) }
   end
 end

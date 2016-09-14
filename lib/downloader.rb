@@ -17,7 +17,7 @@ class Downloader
 private
 
   def save(response, destination)
-    #read content of zipfile and write to file to be saved in tmp folder
+    #read content of zipfile and write to file to be saved in tmp/zips folder
     open(destination, 'w') do |file|
       response.read_body do |str|
         file.write(str)
